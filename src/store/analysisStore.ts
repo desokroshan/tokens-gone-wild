@@ -49,7 +49,7 @@ export const useAnalysisStore = create<AnalysisState>()(
     {
       name: 'cpo-ai-analysis',
       storage: createJSONStorage(() => sessionStorage),
-      partialize: (s) => ({ query: s.query, status: s.status, result: s.result }),
+      partialize: (s) => ({ query: s.query, result: s.result }),
     },
   ),
 )

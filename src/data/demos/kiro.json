@@ -1,0 +1,106 @@
+{
+  "slug": "kiro",
+  "label": "Kiro",
+  "description": "Amazon's AI-native IDE",
+  "painPoints": [
+    {
+      "id": "pp1",
+      "title": "Agent tasks loop endlessly on complex refactors",
+      "description": "Agentic tasks get stuck in recursive loops on multi-file refactors, consuming tokens without making progress. Requires force-quitting the agent.",
+      "severity": "critical",
+      "frequency": 934
+    },
+    {
+      "id": "pp2",
+      "title": "Spec files go stale silently",
+      "description": "Specs generated for a feature become outdated as code evolves, but Kiro offers no diff or staleness signal. Teams discover drift only after agent produces wrong output.",
+      "severity": "critical",
+      "frequency": 812
+    },
+    {
+      "id": "pp3",
+      "title": "Autopilot makes unexpected file deletions",
+      "description": "Autopilot mode has deleted non-empty files it deemed 'redundant' during cleanup tasks. No dry-run or preview mode available before destructive changes.",
+      "severity": "high",
+      "frequency": 677
+    },
+    {
+      "id": "pp4",
+      "title": "Poor Python / non-Node ecosystem support",
+      "description": "Hooks, auto-imports, and agent context work well for JS/TS but break down for Python, Go, and Rust projects. Many ecosystem-specific tools are not wired.",
+      "severity": "high",
+      "frequency": 521
+    },
+    {
+      "id": "pp5",
+      "title": "No pause / resume for long agent runs",
+      "description": "Once an agent task is kicked off, there is no way to pause it partway and resume later. Cancel is the only option, discarding all progress.",
+      "severity": "medium",
+      "frequency": 403
+    },
+    {
+      "id": "pp6",
+      "title": "Context window overflows on large monorepos",
+      "description": "Agent loses earlier file context in repos >200k LOC, producing inconsistent code that contradicts previously established patterns.",
+      "severity": "medium",
+      "frequency": 298
+    }
+  ],
+  "featureRequests": [
+    { "id": "fr1", "title": "Undo / rollback for agent changes", "description": "One-click rollback of all files modified during an agent session, with a git-style diff preview before committing.", "votes": 1870, "category": "Safety" },
+    { "id": "fr2", "title": "Spec staleness detection", "description": "Automatically flag specs that are out of sync with the current codebase and suggest a refresh.", "votes": 1340, "category": "Specs" },
+    { "id": "fr3", "title": "Multi-repo / monorepo context", "description": "Allow agent tasks to span across multiple packages in a monorepo with shared context and dependency awareness.", "votes": 1120, "category": "Core" },
+    { "id": "fr4", "title": "Dry-run mode for autopilot", "description": "Preview all file changes autopilot intends to make before executing, with approve/reject per file.", "votes": 988, "category": "Safety" },
+    { "id": "fr5", "title": "CI/CD spec integration", "description": "Auto-generate GitHub Actions workflows from spec files, keeping pipeline and spec in sync.", "votes": 734, "category": "DevOps" },
+    { "id": "fr6", "title": "Custom agent personas / prompts", "description": "Allow teams to define a shared agent persona (tone, conventions, test style) stored in .kiro/persona.md.", "votes": 567, "category": "Customization" },
+    { "id": "fr7", "title": "Pair mode (human + agent simultaneously)", "description": "Allow the developer to type alongside the agent in real time rather than waiting for the agent to finish.", "votes": 445, "category": "UX" },
+    { "id": "fr8", "title": "Built-in test generation from specs", "description": "Auto-generate unit and integration test scaffolding directly from the spec acceptance criteria.", "votes": 389, "category": "Testing" }
+  ],
+  "sentiment": {
+    "positive": 61,
+    "neutral": 22,
+    "negative": 17,
+    "summary": "Early adopters are genuinely excited by Kiro's spec-driven workflow and agent depth, but trust is fragile — a single destructive autopilot incident turns enthusiasts into skeptics. Safety and transparency features are the most-requested theme by a wide margin."
+  },
+  "competitors": [
+    {
+      "id": "c1",
+      "name": "Cursor",
+      "description": "AI-first VS Code fork.",
+      "threat_level": "high",
+      "comparison": "The default 'AI IDE' comparison. Cursor's established tab-complete and Composer mode feel more predictable. Kiro must differentiate on specs and deeper autonomy, not just inline completions."
+    },
+    {
+      "id": "c2",
+      "name": "GitHub Copilot (agent mode)",
+      "description": "Microsoft's AI coding assistant.",
+      "threat_level": "high",
+      "comparison": "Deep VS Code integration and brand recognition give Copilot a distribution moat. GitHub's new agent mode directly competes with Kiro's autopilot at a lower context-switch cost for existing users."
+    },
+    {
+      "id": "c3",
+      "name": "Windsurf",
+      "description": "Codeium's agentic IDE.",
+      "threat_level": "medium",
+      "comparison": "Windsurf's Cascade agent is seen as more stable for multi-file tasks. Its 'flows' concept resonates with users who find Kiro specs too heavyweight for small tasks."
+    },
+    {
+      "id": "c4",
+      "name": "Devin",
+      "description": "Autonomous software engineer.",
+      "threat_level": "low",
+      "comparison": "Devin targets fully autonomous end-to-end tasks — a different market segment. Seen as complementary by most teams, though its PR review features overlap with Kiro autopilot."
+    }
+  ],
+  "roadmap": [
+    { "id": "r1", "title": "Undo / rollback for agent sessions", "priority": "P1", "impact": "High", "effort": "Medium", "reason": "Mentioned in 47% of negative discussions and #1 feature request", "percentage": 47 },
+    { "id": "r2", "title": "Dry-run preview before autopilot executes", "priority": "P1", "impact": "High", "effort": "Low", "reason": "Directly addresses file-deletion incidents in 34% of trust complaints", "percentage": 34 },
+    { "id": "r3", "title": "Spec staleness diff & refresh prompt", "priority": "P1", "impact": "High", "effort": "Medium", "reason": "Mentioned in 41% of productivity complaints", "percentage": 41 },
+    { "id": "r4", "title": "Pause / resume for running agent tasks", "priority": "P2", "impact": "Medium", "effort": "Medium", "reason": "Appears in 28% of UX feature requests", "percentage": 28 },
+    { "id": "r5", "title": "Monorepo multi-package context", "priority": "P2", "impact": "High", "effort": "High", "reason": "Blocker for 22% of enterprise evaluators", "percentage": 22 },
+    { "id": "r6", "title": "Python / Go ecosystem parity", "priority": "P2", "impact": "High", "effort": "High", "reason": "Cited as primary reason for not switching from Cursor in 26% of Reddit threads", "percentage": 26 },
+    { "id": "r7", "title": "Built-in test generation from specs", "priority": "P3", "impact": "Medium", "effort": "Medium", "reason": "Appears in 19% of spec-related feature discussions", "percentage": 19 },
+    { "id": "r8", "title": "Custom agent persona config (.kiro/persona.md)", "priority": "P3", "impact": "Medium", "effort": "Low", "reason": "Top request from team leads adopting shared coding standards", "percentage": 15 },
+    { "id": "r9", "title": "CI/CD spec → workflow generation", "priority": "P3", "impact": "Medium", "effort": "Medium", "reason": "Appears in 18% of DevOps-oriented discussions", "percentage": 18 }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "slug": "siri",
+  "label": "Siri",
+  "description": "Apple's voice assistant",
+  "painPoints": [
+    {
+      "id": "pp1",
+      "title": "Fails on multi-step commands",
+      "description": "Compound requests like 'text Mom I'll be late, then set a timer for 20 minutes' reliably break. Siri handles the first action and ignores the rest with no error signal.",
+      "severity": "critical",
+      "frequency": 2140
+    },
+    {
+      "id": "pp2",
+      "title": "No memory between conversations",
+      "description": "Each Siri session is stateless. Users cannot reference earlier requests ('remind me about what I asked you yesterday') and must repeat context every time.",
+      "severity": "critical",
+      "frequency": 1893
+    },
+    {
+      "id": "pp3",
+      "title": "Unreliable third-party app deep-linking",
+      "description": "Shortcuts integrations with third-party apps frequently break after app updates. Siri often opens the app home screen instead of the intended action.",
+      "severity": "high",
+      "frequency": 1456
+    },
+    {
+      "id": "pp4",
+      "title": "Frequent 'I can't help with that' refusals",
+      "description": "Siri refuses requests that Google Assistant or Alexa handle trivially (e.g., 'what's playing on Netflix right now'). Refusals feel arbitrary and erode trust.",
+      "severity": "high",
+      "frequency": 1221
+    },
+    {
+      "id": "pp5",
+      "title": "Struggles with accents and background noise",
+      "description": "Recognition accuracy drops sharply with non-US accents or ambient sound above 60 dB. Users report needing to repeat commands 3+ times in everyday environments.",
+      "severity": "medium",
+      "frequency": 934
+    },
+    {
+      "id": "pp6",
+      "title": "Apple Intelligence features delayed or region-locked",
+      "description": "Promised AI features from WWDC 2024 arrived months late and remain unavailable outside the US, UK, and AU. Heavy marketing with slow delivery damages brand trust.",
+      "severity": "medium",
+      "frequency": 712
+    }
+  ],
+  "featureRequests": [
+    { "id": "fr1", "title": "Cross-app workflow automation", "description": "Chain actions across multiple apps in a single voice command without requiring a pre-built Shortcut.", "votes": 3210, "category": "Core" },
+    { "id": "fr2", "title": "Persistent context / memory", "description": "Remember user preferences, recurring tasks, and recent conversation context across sessions.", "votes": 2870, "category": "AI" },
+    { "id": "fr3", "title": "Live web search results", "description": "Answer factual questions using real-time web data instead of cached knowledge, similar to Perplexity or Google Assistant.", "votes": 2340, "category": "Knowledge" },
+    { "id": "fr4", "title": "Proactive suggestions without privacy tradeoffs", "description": "Surface relevant suggestions (leave now, reorder groceries) based on habits without sending data to cloud.", "votes": 1780, "category": "AI" },
+    { "id": "fr5", "title": "Better Shortcuts debugging", "description": "Clear error messages and a live log when a Shortcut fails, rather than silent failure or generic 'Something went wrong'.", "votes": 1340, "category": "Developer" },
+    { "id": "fr6", "title": "Third-party default app respect", "description": "Honor default app settings (browser, music, maps) set by the user rather than defaulting to Apple apps.", "votes": 1120, "category": "UX" },
+    { "id": "fr7", "title": "On-device LLM for complex Q&A", "description": "Run a capable small LLM locally for nuanced questions that currently result in a web search hand-off.", "votes": 987, "category": "AI" },
+    { "id": "fr8", "title": "Multi-language mid-sentence switching", "description": "Detect and handle bilingual commands without requiring a language change in settings.", "votes": 654, "category": "Accessibility" }
+  ],
+  "sentiment": {
+    "positive": 31,
+    "neutral": 24,
+    "negative": 45,
+    "summary": "Siri sentiment is the most negative of any major assistant — users are not indifferent, they are actively frustrated. The dominant narrative is a decade of unfulfilled potential now being exploited by ChatGPT and Gemini. Apple Intelligence has reset expectations but delivery speed is a serious credibility problem."
+  },
+  "competitors": [
+    {
+      "id": "c1",
+      "name": "ChatGPT (voice mode)",
+      "description": "OpenAI's conversational AI with voice.",
+      "threat_level": "high",
+      "comparison": "ChatGPT's Advanced Voice Mode is the most-cited reason users are abandoning Siri for Q&A and conversation. Its multi-turn memory and nuanced answers set a new benchmark Siri is visibly failing to match."
+    },
+    {
+      "id": "c2",
+      "name": "Google Assistant / Gemini",
+      "description": "Google's AI assistant ecosystem.",
+      "threat_level": "high",
+      "comparison": "Gemini's deep Android integration and real-time search answers make it the go-to comparison for factual queries. Android users report Gemini handling cross-app workflows that Siri still cannot do after years of Shortcuts."
+    },
+    {
+      "id": "c3",
+      "name": "Alexa",
+      "description": "Amazon's smart home assistant.",
+      "threat_level": "medium",
+      "comparison": "Alexa leads in smart home control and third-party skill depth. Its 100k+ skill library contrasts with Siri's limited SiriKit surface, especially for home automation power users."
+    },
+    {
+      "id": "c4",
+      "name": "Perplexity AI",
+      "description": "AI-powered answer engine.",
+      "threat_level": "low",
+      "comparison": "Perplexity is gaining as a Safari/Siri alternative for research and factual Q&A among tech-forward iOS users, though it lacks voice-native interaction."
+    }
+  ],
+  "roadmap": [
+    { "id": "r1", "title": "Multi-step command execution engine", "priority": "P1", "impact": "High", "effort": "High", "reason": "Most-cited pain point across 53% of negative reviews", "percentage": 53 },
+    { "id": "r2", "title": "Cross-session memory (on-device, opt-in)", "priority": "P1", "impact": "High", "effort": "High", "reason": "Mentioned in 47% of negative discussions; addresses ChatGPT comparison directly", "percentage": 47 },
+    { "id": "r3", "title": "Third-party default app enforcement", "priority": "P1", "impact": "High", "effort": "Low", "reason": "Legal pressure + 36% user complaint rate; low engineering lift", "percentage": 36 },
+    { "id": "r4", "title": "Live web search integration", "priority": "P2", "impact": "High", "effort": "Medium", "reason": "Appears in 58% of feature requests; direct parity gap vs. Google and ChatGPT", "percentage": 58 },
+    { "id": "r5", "title": "On-device small LLM for complex Q&A", "priority": "P2", "impact": "High", "effort": "High", "reason": "Aligns with Apple Intelligence roadmap and addresses factual refusal complaints", "percentage": 44 },
+    { "id": "r6", "title": "Accent & noise robustness improvements", "priority": "P2", "impact": "Medium", "effort": "Medium", "reason": "Accessibility gap affecting 23% of non-US English users", "percentage": 23 },
+    { "id": "r7", "title": "Proactive on-device suggestions engine", "priority": "P3", "impact": "Medium", "effort": "High", "reason": "Appears in 28% of feature requests; privacy angle differentiates from Google", "percentage": 28 },
+    { "id": "r8", "title": "Shortcuts error logging & debugger", "priority": "P3", "impact": "Medium", "effort": "Low", "reason": "Developer and power-user segment blocker; low complexity to ship", "percentage": 17 },
+    { "id": "r9", "title": "Multi-language bilingual command support", "priority": "P3", "impact": "Medium", "effort": "Medium", "reason": "High-value for 20%+ of global iOS users in bilingual households", "percentage": 20 }
+  ]
+}

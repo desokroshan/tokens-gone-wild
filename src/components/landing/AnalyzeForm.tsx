@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useAnalysis } from '../../hooks/useAnalysis'
 import { AgentProgressModal } from './AgentProgressModal'
+import { DEMO_LIST } from '../../data/demos'
 
 export function AnalyzeForm() {
   const [value, setValue] = useState('')
@@ -15,6 +16,13 @@ export function AnalyzeForm() {
     e.preventDefault()
     if (!value.trim() || isLoading) return
     const jobId = await startAnalysis(value.trim())
+    fetchResults(jobId)
+  }
+
+  const handleDemoClick = async (slug: string) => {
+    if (isLoading) return
+    setValue(slug)
+    const jobId = await startAnalysis(slug)
     fetchResults(jobId)
   }
 
@@ -69,9 +77,38 @@ export function AnalyzeForm() {
           </motion.button>
         </div>
 
-        <p className="mt-3 text-xs" style={{ color: 'rgba(255,255,255,0.25)' }}>
-          Try: "Notion", "Linear", "Figma", or any product URL
-        </p>
+        {/* Demo quick-select pills */}
+        <div className="flex items-center gap-2 mt-3 flex-wrap">
+          <span className="text-xs" style={{ color: 'rgba(255,255,255,0.25)' }}>
+            Try a demo:
+          </span>
+          {DEMO_LIST.map((demo) => (
+            <motion.button
+              key={demo.slug}
+              type="button"
+              disabled={isLoading}
+              onClick={() => handleDemoClick(demo.slug)}
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.96 }}
+              className="px-3 py-1 rounded-full text-xs font-medium transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+              style={{
+                background: 'rgba(201,140,46,0.1)',
+                border: '1px solid rgba(201,140,46,0.25)',
+                color: '#e3b264',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'rgba(201,140,46,0.18)'
+                e.currentTarget.style.borderColor = 'rgba(201,140,46,0.45)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'rgba(201,140,46,0.1)'
+                e.currentTarget.style.borderColor = 'rgba(201,140,46,0.25)'
+              }}
+            >
+              {demo.label}
+            </motion.button>
+          ))}
+        </div>
       </form>
     </>
   )

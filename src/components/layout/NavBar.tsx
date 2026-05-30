@@ -10,8 +10,8 @@ const NAV_LINKS = [
 
 export function NavBar() {
   const location = useLocation();
-  const status = useAnalysisStore((s) => s.status);
-  const isActive = status === "done";
+  const result = useAnalysisStore((s) => s.result);
+  const isActive = result !== null;
 
   return (
     <nav
@@ -22,7 +22,11 @@ export function NavBar() {
         borderBottom: "1px solid rgba(255,255,255,0.08)",
       }}
     >
-      <Link to="/" className="flex items-center no-underline">
+      <Link
+        to="/"
+        className="flex items-center no-underline cursor-pointer"
+        onClick={() => useAnalysisStore.getState().reset()}
+      >
         <img src={logo} alt="Tokens Gone Wild" className="h-12 w-auto" />
       </Link>
 
