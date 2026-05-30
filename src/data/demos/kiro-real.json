@@ -1,0 +1,226 @@
+{
+  "slug": "kiro",
+  "label": "Kiro",
+  "description": "Amazon's AI-native IDE",
+  "painPoints": [
+    {
+      "id": "pp1",
+      "title": "Mass account bans with no explanation or support",
+      "description": "Paid users including enterprise customers are getting randomly suspended without warning or reason. Support responses are slow, copy-paste, and accounts remain broken even after being 'reinstated'. Multiple Reddit threads with 78+ upvotes document this.",
+      "severity": "critical",
+      "frequency": 1247
+    },
+    {
+      "id": "pp2",
+      "title": "Constant 'Unexpected error, please retry' interruptions",
+      "description": "Agent tasks are frequently interrupted by generic error messages that break flow. The agent forgets its progress and restarts from scratch, wasting tokens and time. Users report this makes Kiro 'absolutely unusable' during high-load periods.",
+      "severity": "critical",
+      "frequency": 934
+    },
+    {
+      "id": "pp3",
+      "title": "Slow model updates — always behind competitors",
+      "description": "New Claude models (Opus 4.7, 4.8) take days or weeks to appear in Kiro after being available elsewhere. Users feel stuck on outdated models while paying premium prices. Bedrock dependency creates a bottleneck competitors don't have.",
+      "severity": "high",
+      "frequency": 721
+    },
+    {
+      "id": "pp4",
+      "title": "Poor Python and non-JS/TS ecosystem support",
+      "description": "Pylance missing, F2 rename doesn't refactor, auto-imports broken for Python. Language server features that 'every IDE solved 20 years ago' don't work. Users resort to opening VSCode alongside Kiro just for basic code editing.",
+      "severity": "high",
+      "frequency": 589
+    },
+    {
+      "id": "pp5",
+      "title": "No worktree or multi-branch support",
+      "description": "Tasks get queued with no parallel execution. Users must open multiple Kiro windows for different branches. Cursor, Claude Code, and Codex all support multi-branch workflows in a single window.",
+      "severity": "high",
+      "frequency": 467
+    },
+    {
+      "id": "pp6",
+      "title": "Credit system burns too fast on specs and planning",
+      "description": "A single markdown plan can cost 2-3 credits. The $20 plan (1000 credits) runs out quickly for active users. No flat-rate option between $20 and $200 tiers. Users feel nickel-and-dimed compared to Cursor's unlimited model.",
+      "severity": "medium",
+      "frequency": 398
+    }
+  ],
+  "featureRequests": [
+    {
+      "id": "fr1",
+      "title": "Faster model integration (same-day new releases)",
+      "description": "Ship new Claude and open-weight models the same day they're available, not days or weeks later. Remove the Bedrock bottleneck that keeps Kiro behind every competitor.",
+      "votes": 1540,
+      "category": "Core"
+    },
+    {
+      "id": "fr2",
+      "title": "Worktree / multi-branch parallel agents",
+      "description": "Allow multiple agent sessions across different branches in a single window, similar to Claude Code and Codex. Stop forcing users to open 6 Kiro windows for 2 projects.",
+      "votes": 1120,
+      "category": "UX"
+    },
+    {
+      "id": "fr3",
+      "title": "Better account stability and transparent communication",
+      "description": "Stop random account suspensions, provide clear ban reasons, and respond to support tickets within hours not days. Enterprise customers need SLA-backed reliability.",
+      "votes": 987,
+      "category": "Trust"
+    },
+    {
+      "id": "fr4",
+      "title": "Full Python/Go/Rust language server parity",
+      "description": "Bring Pylance, proper refactoring, auto-imports, and language intelligence to non-JS/TS languages. Match what VSCode provides out of the box.",
+      "votes": 834,
+      "category": "Ecosystem"
+    },
+    {
+      "id": "fr5",
+      "title": "Flat-rate unlimited plan option",
+      "description": "Offer a predictable monthly cost without credit anxiety. Many users prefer Cursor's model where they don't have to think about per-request costs.",
+      "votes": 723,
+      "category": "Pricing"
+    },
+    {
+      "id": "fr6",
+      "title": "Background agents / async task execution",
+      "description": "Allow agent tasks to run in the background while the developer continues coding, similar to Cursor's background agents feature.",
+      "votes": 612,
+      "category": "Core"
+    },
+    {
+      "id": "fr7",
+      "title": "Better autocomplete to match Cursor quality",
+      "description": "Cursor's tab-complete is consistently cited as the best on the market. Kiro needs competitive inline code suggestions beyond just agentic chat.",
+      "votes": 534,
+      "category": "Core"
+    },
+    {
+      "id": "fr8",
+      "title": "Drag-and-drop files/folders into chat",
+      "description": "Every other agentic IDE has had this since version 0.1. Users want to drag files and folders directly into the chat context without using # references.",
+      "votes": 445,
+      "category": "UX"
+    }
+  ],
+  "sentiment": {
+    "positive": 52,
+    "neutral": 23,
+    "negative": 25,
+    "summary": "Users genuinely love Kiro's spec-driven workflow and find it produces better-structured code than competitors. Enterprise users with free AWS access are the happiest cohort. However, trust is severely damaged by mass account bans, constant errors during high-load, and slow model updates. The gap between Kiro's vision and its execution reliability is the dominant theme — people want to love it but keep getting burned."
+  },
+  "competitors": [
+    {
+      "id": "c1",
+      "name": "Cursor",
+      "description": "AI-first VS Code fork with best-in-class autocomplete.",
+      "threat_level": "high",
+      "comparison": "Cursor's tab-complete and background agents are consistently cited as superior. Multiple users say they 'can't switch' because of autocomplete quality alone. Cursor also has faster model integration and more predictable pricing. Kiro's spec workflow is the main differentiator keeping users from fully switching."
+    },
+    {
+      "id": "c2",
+      "name": "Claude Code",
+      "description": "Anthropic's CLI-based coding agent.",
+      "threat_level": "high",
+      "comparison": "Many Kiro users are migrating to Claude Code for its larger context window, better reliability, and terminal-first workflow. The CLI keeps context longer and doesn't suffer from IDE-related bugs. Users often use Kiro just for spec generation then switch to Claude Code for implementation."
+    },
+    {
+      "id": "c3",
+      "name": "GitHub Copilot",
+      "description": "Microsoft's AI coding assistant with deep VS Code integration.",
+      "threat_level": "medium",
+      "comparison": "Copilot's distribution moat through VS Code and enterprise penetration is massive. However, users complain about its small context window (64-128k) and rate limiting. Kiro offers deeper agentic capabilities but Copilot wins on stability and ecosystem integration."
+    },
+    {
+      "id": "c4",
+      "name": "Antigravity (Google)",
+      "description": "Google's free AI IDE with Gemini Pro models.",
+      "threat_level": "medium",
+      "comparison": "Antigravity is free and includes Gemini Pro 3.0, making it attractive for budget-conscious users. However, Reddit consensus is that Gemini models are 'stubborn' and produce lower quality code. Kiro users who tried Antigravity mostly came back, citing better code understanding in Kiro."
+    }
+  ],
+  "roadmap": [
+    {
+      "id": "r1",
+      "title": "Account stability and ban prevention system",
+      "priority": "P1",
+      "impact": "High",
+      "effort": "Medium",
+      "reason": "Account bans are the #1 topic by upvotes (78+ on main thread) and directly cause user churn to Claude Code",
+      "percentage": 52
+    },
+    {
+      "id": "r2",
+      "title": "Same-day model availability (remove Bedrock lag)",
+      "priority": "P1",
+      "impact": "High",
+      "effort": "High",
+      "reason": "Cited as primary reason for leaving in 38% of 'leaving Kiro' posts. Users paying $200/month expect cutting-edge models immediately",
+      "percentage": 38
+    },
+    {
+      "id": "r3",
+      "title": "Error recovery and agent memory persistence",
+      "priority": "P1",
+      "impact": "High",
+      "effort": "Medium",
+      "reason": "The 'unexpected error' loop that resets agent progress appears in 34% of negative posts and wastes credits",
+      "percentage": 34
+    },
+    {
+      "id": "r4",
+      "title": "Worktree and multi-branch parallel execution",
+      "priority": "P2",
+      "impact": "High",
+      "effort": "High",
+      "reason": "Blocker for power users managing multiple features. Directly compared unfavorably to Claude Code and Codex in 28% of comparison threads",
+      "percentage": 28
+    },
+    {
+      "id": "r5",
+      "title": "Python/Go/Rust language server parity",
+      "priority": "P2",
+      "impact": "High",
+      "effort": "Medium",
+      "reason": "Non-JS developers report opening VSCode alongside Kiro. Cited in 26% of 'IDE quality' complaints",
+      "percentage": 26
+    },
+    {
+      "id": "r6",
+      "title": "Competitive autocomplete (match Cursor quality)",
+      "priority": "P2",
+      "impact": "Medium",
+      "effort": "High",
+      "reason": "Cursor's autocomplete is the #1 reason users maintain dual subscriptions. Mentioned in 22% of Kiro vs Cursor comparisons",
+      "percentage": 22
+    },
+    {
+      "id": "r7",
+      "title": "Flexible pricing tiers ($50, $75 options)",
+      "priority": "P3",
+      "impact": "Medium",
+      "effort": "Low",
+      "reason": "Gap between $20 and $200 plans frustrates mid-tier users. 19% of pricing discussions request intermediate options",
+      "percentage": 19
+    },
+    {
+      "id": "r8",
+      "title": "Background agents for async task execution",
+      "priority": "P3",
+      "impact": "Medium",
+      "effort": "High",
+      "reason": "Feature gap vs Cursor cited in 16% of feature comparison threads",
+      "percentage": 16
+    },
+    {
+      "id": "r9",
+      "title": "Drag-and-drop context and inline file references",
+      "priority": "P3",
+      "impact": "Low",
+      "effort": "Low",
+      "reason": "Basic UX feature every competitor has. Mentioned as embarrassing omission in 12% of UX feedback",
+      "percentage": 12
+    }
+  ]
+}
