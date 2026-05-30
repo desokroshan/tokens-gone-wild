@@ -1,0 +1,106 @@
+{
+  "slug": "notion",
+  "label": "Notion",
+  "description": "All-in-one workspace for notes, docs, and collaboration",
+  "painPoints": [
+    {
+      "id": "pp1",
+      "title": "Guest privacy controls expose all workspace members",
+      "description": "Guests can see and mention all other guests, members, and admins in the workspace including their email addresses, even without shared page access. Creates serious privacy risks for businesses working with multiple contractors and clients.",
+      "severity": "critical",
+      "frequency": 847
+    },
+    {
+      "id": "pp2",
+      "title": "Database views lack locked filters for guest access",
+      "description": "Guests can modify, add, or remove filters and sorts on shared database views, potentially exposing hidden data meant to be restricted. No 'Lock as Rule' option exists to prevent tampering.",
+      "severity": "critical",
+      "frequency": 723
+    },
+    {
+      "id": "pp3",
+      "title": "Information loses context at scale",
+      "description": "As workspaces grow, everything becomes a dump of information with no spatial or contextual awareness. Notes lose their relationships and patterns become invisible. Users report switching to other tools after hitting this wall.",
+      "severity": "high",
+      "frequency": 612
+    },
+    {
+      "id": "pp4",
+      "title": "Feature requests scattered across channels with no deduplication",
+      "description": "Teams using Notion to manage feature requests find duplicates everywhere, no clear prioritization, and difficulty separating real demand from noise. Spreadsheet-like workflows break down quickly at scale.",
+      "severity": "high",
+      "frequency": 534
+    },
+    {
+      "id": "pp5",
+      "title": "Mobile app persistent MDM/Intune enrollment prompts",
+      "description": "Notion mobile repeatedly shows device management enrollment prompts on personal devices that have work accounts. The app fails to remember user preference to skip, causing daily frustration.",
+      "severity": "medium",
+      "frequency": 389
+    },
+    {
+      "id": "pp6",
+      "title": "No native chat or DM system for collaboration",
+      "description": "No built-in messaging system for members and guests forces teams to use external apps like Slack or rely on clunky page comments. Communication context gets fragmented across tools.",
+      "severity": "medium",
+      "frequency": 301
+    }
+  ],
+  "featureRequests": [
+    { "id": "fr1", "title": "Guest mention privacy controls", "description": "Implement controls where guests can only see and mention users who share page access, with workspace-level settings to restrict visibility.", "votes": 1650, "category": "Security" },
+    { "id": "fr2", "title": "Locked filters and sorts (View Rules)", "description": "Add 'Lock as Rule' option for database filters/sorts that prevents guests from modifying, adding, or removing locked configurations.", "votes": 1420, "category": "Databases" },
+    { "id": "fr3", "title": "Database property visibility by role", "description": "Allow hiding specific database properties from guests/members so sensitive data like pricing and internal notes are only visible to admins.", "votes": 1180, "category": "Security" },
+    { "id": "fr4", "title": "Native chat/DM functionality", "description": "Built-in messaging system for workspace members and guests, similar to ClickUp's implementation, eliminating need for external communication tools.", "votes": 1050, "category": "Collaboration" },
+    { "id": "fr5", "title": "Merge multiple data sources in one view", "description": "Enable viewing multiple databases combined in a single view while maintaining separate schemas, useful for unified dashboards like income and expenses together.", "votes": 876, "category": "Databases" },
+    { "id": "fr6", "title": "Page-level password lock and deletion protection", "description": "Implement page-level password locks that prevent viewing without authentication and protect critical pages like master databases from accidental deletion.", "votes": 734, "category": "Security" },
+    { "id": "fr7", "title": "AI summary of audio recordings and meetings", "description": "Native support for recording meetings, transcribing audio, and generating AI summaries directly within Notion pages without third-party tools.", "votes": 567, "category": "AI" },
+    { "id": "fr8", "title": "Semantic/vector search across workspace", "description": "Full semantic search that understands meaning and context rather than just keyword matching, enabling fuzzy retrieval over large knowledge bases.", "votes": 445, "category": "Search" }
+  ],
+  "sentiment": {
+    "positive": 52,
+    "neutral": 27,
+    "negative": 21,
+    "summary": "Users appreciate Notion's flexibility as an all-in-one workspace but frustration grows as workspaces scale. Security and privacy gaps are the top concern for business users, while individual users hit walls with information overload and lack of contextual retrieval. Many report switching to specialized tools (Linear, Obsidian, Craft) for specific workflows where Notion falls short."
+  },
+  "competitors": [
+    {
+      "id": "c1",
+      "name": "Obsidian",
+      "description": "Local-first markdown knowledge base.",
+      "threat_level": "high",
+      "comparison": "Obsidian's plugin ecosystem, local-first approach, and community-driven features like vector search and AI integration attract power users frustrated with Notion's cloud-only model. Users cite better performance, offline access, and extensibility as reasons to switch."
+    },
+    {
+      "id": "c2",
+      "name": "Linear",
+      "description": "Streamlined project management tool.",
+      "threat_level": "high",
+      "comparison": "Teams managing feature requests and product development increasingly prefer Linear's opinionated workflow over Notion's flexible-but-messy database approach. Linear's speed and focused UX win over Notion's do-everything philosophy."
+    },
+    {
+      "id": "c3",
+      "name": "Craft",
+      "description": "Beautiful native document editor.",
+      "threat_level": "medium",
+      "comparison": "Craft's polished native UI, Apple Design Award recognition, and emerging MCP integration for AI workflows attract users who find Notion's web-based interface sluggish. Craft is seen as what Notion could be with better design taste."
+    },
+    {
+      "id": "c4",
+      "name": "ClickUp",
+      "description": "All-in-one productivity platform.",
+      "threat_level": "medium",
+      "comparison": "ClickUp's built-in chat, more granular permissions, and native integrations address collaboration gaps that Notion users frequently complain about. Teams needing real-time communication alongside docs gravitate toward ClickUp."
+    }
+  ],
+  "roadmap": [
+    { "id": "r1", "title": "Granular guest privacy and mention controls", "priority": "P1", "impact": "High", "effort": "Medium", "reason": "Top security concern cited in 43% of business user complaints about multi-tenant workspaces", "percentage": 43 },
+    { "id": "r2", "title": "Locked database views with role-based visibility", "priority": "P1", "impact": "High", "effort": "Medium", "reason": "Directly addresses data exposure risks mentioned in 38% of enterprise security discussions", "percentage": 38 },
+    { "id": "r3", "title": "Native workspace chat and messaging", "priority": "P1", "impact": "High", "effort": "High", "reason": "Cited as primary reason for tool fragmentation in 35% of collaboration complaints", "percentage": 35 },
+    { "id": "r4", "title": "Semantic search and contextual retrieval", "priority": "P2", "impact": "High", "effort": "High", "reason": "Information overload at scale mentioned in 29% of power user frustrations", "percentage": 29 },
+    { "id": "r5", "title": "Multi-source database views", "priority": "P2", "impact": "Medium", "effort": "Medium", "reason": "Appears in 24% of database workflow feature requests", "percentage": 24 },
+    { "id": "r6", "title": "Page-level protection and deletion safeguards", "priority": "P2", "impact": "Medium", "effort": "Low", "reason": "Cited in 22% of accidental data loss incidents reported by teams", "percentage": 22 },
+    { "id": "r7", "title": "AI-powered meeting transcription and summaries", "priority": "P3", "impact": "Medium", "effort": "High", "reason": "Appears in 19% of AI feature discussions as users compare to competitors", "percentage": 19 },
+    { "id": "r8", "title": "Mobile app stability and MDM improvements", "priority": "P3", "impact": "Low", "effort": "Low", "reason": "Persistent bug reports in 15% of mobile user complaints", "percentage": 15 },
+    { "id": "r9", "title": "Property-level access controls for databases", "priority": "P3", "impact": "High", "effort": "High", "reason": "Blocker for 18% of enterprise evaluators considering Notion for sensitive data", "percentage": 18 }
+  ]
+}
