@@ -60,7 +60,7 @@ flowchart LR
 ## Prerequisites
 
 - Node.js v20+
-- pnpm v10+
+- pnpm v10+ (**do not use npm** — rolldown's native bindings require pnpm to resolve correctly)
 
 ```bash
 npm install -g pnpm
