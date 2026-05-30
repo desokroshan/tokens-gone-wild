@@ -8,6 +8,79 @@ app.use(express.json())
 const APIFY_TOKEN = process.env.APIFY_TOKEN!
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! })
 
+// ── Box OAuth ──────────────────────────────────────────────────────────────────
+
+const BOX_CLIENT_ID     = process.env.CLIENT_ID!
+const BOX_CLIENT_SECRET = process.env.CLIENT_SECRET!
+const BOX_REDIRECT_URI  = 'http://localhost:3001/auth/box/callback'
+
+let boxTokens: { access_token: string; refresh_token: string; expires_at: number } | null = null
+
+async function getBoxToken(): Promise<string> {
+  if (boxTokens && Date.now() < boxTokens.expires_at - 60_000) {
+    return boxTokens.access_token
+  }
+  if (boxTokens?.refresh_token) {
+    const r = await fetch('https://api.box.com/oauth2/token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        grant_type: 'refresh_token',
+        refresh_token: boxTokens.refresh_token,
+        client_id: BOX_CLIENT_ID,
+        client_secret: BOX_CLIENT_SECRET,
+      }),
+    })
+    const data = await r.json() as any
+    boxTokens = {
+      access_token: data.access_token,
+      refresh_token: data.refresh_token,
+      expires_at: Date.now() + data.expires_in * 1000,
+    }
+    console.log('Box token refreshed')
+    return boxTokens.access_token
+  }
+  throw new Error('Not authenticated with Box — visit http://localhost:3001/auth/box')
+}
+
+// Start OAuth flow
+app.get('/auth/box', (_req, res) => {
+  const params = new URLSearchParams({
+    response_type: 'code',
+    client_id: BOX_CLIENT_ID,
+    redirect_uri: BOX_REDIRECT_URI,
+  })
+  res.redirect(`https://account.box.com/api/oauth2/authorize?${params}`)
+})
+
+// OAuth callback — exchange code for tokens
+app.get('/auth/box/callback', async (req, res) => {
+  const { code } = req.query as { code?: string }
+  if (!code) { res.status(400).send('Missing code'); return }
+
+  const r = await fetch('https://api.box.com/oauth2/token', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      grant_type: 'authorization_code',
+      code,
+      client_id: BOX_CLIENT_ID,
+      client_secret: BOX_CLIENT_SECRET,
+      redirect_uri: BOX_REDIRECT_URI,
+    }),
+  })
+  const data = await r.json() as any
+  if (!r.ok) { res.status(500).send(`Box auth failed: ${data.error_description ?? data.error}`); return }
+
+  boxTokens = {
+    access_token: data.access_token,
+    refresh_token: data.refresh_token,
+    expires_at: Date.now() + data.expires_in * 1000,
+  }
+  console.log('Box authenticated successfully')
+  res.send('<h2>Box connected! You can close this tab and upload roadmaps.</h2>')
+})
+
 // jobId → original query, so GET /results/:jobId doesn't need the query in the URL
 const jobQueries = new Map<string, string>()
 
@@ -144,30 +217,51 @@ app.post('/api/box-upload', async (req, res) => {
     return
   }
 
-  const token = process.env.DEV_TOKEN
-  if (!token) {
-    res.status(500).json({ error: 'DEV_TOKEN not configured on server' })
+  let token: string
+  try {
+    token = await getBoxToken()
+  } catch (e: any) {
+    res.status(401).json({ error: e.message })
     return
   }
 
-  const form = new FormData()
-  form.append('attributes', JSON.stringify({ name: filename, parent: { id: '0' } }))
-  form.append('file', new Blob([content], { type: 'text/markdown' }), filename)
+  const blob = new Blob([content], { type: 'text/markdown' })
 
-  const boxRes = await fetch('https://upload.box.com/api/2.0/files/content', {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${token}` },
-    body: form,
-  })
+  async function boxUpload(url: string): Promise<{ ok: boolean; status: number; data: any }> {
+    const form = new FormData()
+    form.append('attributes', JSON.stringify({ name: filename, parent: { id: '0' } }))
+    form.append('file', blob, filename)
+    const r = await fetch(url, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${token}` },
+      body: form,
+    })
+    const text = await r.text()
+    let data: any = {}
+    try { data = JSON.parse(text) } catch { /* empty body */ }
+    return { ok: r.ok, status: r.status, data }
+  }
 
-  const data = await boxRes.json() as any
-  if (!boxRes.ok) {
-    console.error('Box error:', data)
-    res.status(boxRes.status).json({ error: data.message ?? 'Box upload failed' })
+  let result = await boxUpload('https://upload.box.com/api/2.0/files/content')
+
+  // 409 = file already exists — overwrite it using the update endpoint
+  if (result.status === 409) {
+    const existingId = result.data?.context_info?.conflicts?.[0]?.id
+    if (!existingId) {
+      res.status(409).json({ error: 'File already exists but could not find its ID to overwrite' })
+      return
+    }
+    result = await boxUpload(`https://upload.box.com/api/2.0/files/${existingId}/content`)
+  }
+
+  if (!result.ok) {
+    console.error(`Box error ${result.status}:`, JSON.stringify(result.data, null, 2))
+    const message = result.data?.message ?? result.data?.code ?? result.data?.error ?? JSON.stringify(result.data)
+    res.status(result.status).json({ error: `Box ${result.status}: ${message}` })
     return
   }
 
-  const file = data.entries?.[0]
+  const file = result.data.entries?.[0]
   if (!file) {
     res.status(500).json({ error: 'No file entry in Box response' })
     return
