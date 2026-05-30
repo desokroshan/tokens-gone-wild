@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import express from 'express'
 import Anthropic from '@anthropic-ai/sdk'
 
@@ -133,5 +134,46 @@ ${corpus}`,
   const clean = text.replace(/^```json\n?/, '').replace(/\n?```$/, '').trim()
   return JSON.parse(clean)
 }
+
+// ── Box Upload ─────────────────────────────────────────────────────────────────
+
+app.post('/api/box-upload', async (req, res) => {
+  const { content, filename } = req.body as { content: string; filename: string }
+  if (!content || !filename) {
+    res.status(400).json({ error: 'content and filename are required' })
+    return
+  }
+
+  const token = process.env.DEV_TOKEN
+  if (!token) {
+    res.status(500).json({ error: 'DEV_TOKEN not configured on server' })
+    return
+  }
+
+  const form = new FormData()
+  form.append('attributes', JSON.stringify({ name: filename, parent: { id: '0' } }))
+  form.append('file', new Blob([content], { type: 'text/markdown' }), filename)
+
+  const boxRes = await fetch('https://upload.box.com/api/2.0/files/content', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${token}` },
+    body: form,
+  })
+
+  const data = await boxRes.json() as any
+  if (!boxRes.ok) {
+    console.error('Box error:', data)
+    res.status(boxRes.status).json({ error: data.message ?? 'Box upload failed' })
+    return
+  }
+
+  const file = data.entries?.[0]
+  if (!file) {
+    res.status(500).json({ error: 'No file entry in Box response' })
+    return
+  }
+
+  res.json({ fileId: file.id, fileName: file.name, url: `https://app.box.com/file/${file.id}` })
+})
 
 app.listen(3001, () => console.log('API server running on :3001'))
