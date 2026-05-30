@@ -1,0 +1,106 @@
+{
+  "slug": "siri",
+  "label": "Siri",
+  "description": "Apple's voice assistant",
+  "painPoints": [
+    {
+      "id": "pp1",
+      "title": "Two years of broken AI promises from WWDC 2024",
+      "description": "Apple Intelligence and personalized Siri were headlined at WWDC 2024 but still haven't shipped as of mid-2026. Reddit users call it an 'absolutely unreal embarrassment' with the tentpole feature repeatedly delayed from iOS 26.4 to iOS 27 and beyond.",
+      "severity": "critical",
+      "frequency": 2847
+    },
+    {
+      "id": "pp2",
+      "title": "'Here's what I found on the web' for basic questions",
+      "description": "Siri defaults to a web search dump for trivial queries like weather, timers, or stopping navigation. Users report asking 'what's the temperature' and getting a Wikipedia article on temperature. The meme response has become shorthand for Siri's incompetence.",
+      "severity": "critical",
+      "frequency": 2134
+    },
+    {
+      "id": "pp3",
+      "title": "Misinterprets commands and takes dangerous wrong actions",
+      "description": "Siri routinely calls contacts instead of setting timers, plays wrong music, stops the wrong device, or texts gibberish while driving. Users report Siri saying 'I love you too' instead of sending a message, or initiating calls to exes unprompted.",
+      "severity": "high",
+      "frequency": 1567
+    },
+    {
+      "id": "pp4",
+      "title": "CarPlay voice control is unreliable and unsafe",
+      "description": "Siri in CarPlay misinterprets dictated messages, refuses to help 'while driving', or navigates to locations mentioned in texts instead of sending them. Users report buying aftermarket CarPlay radios specifically because Siri can't be trusted hands-free.",
+      "severity": "high",
+      "frequency": 1203
+    },
+    {
+      "id": "pp5",
+      "title": "Multi-device confusion between HomePod, Watch, and iPhone",
+      "description": "When multiple Apple devices are in earshot, Siri triggers on the wrong one or triggers on one then silently fails. Timers vanish, commands go unacknowledged, and there's no feedback about which device is handling the request.",
+      "severity": "medium",
+      "frequency": 891
+    },
+    {
+      "id": "pp6",
+      "title": "Region-locked features leave non-US users with nothing",
+      "description": "Apple Intelligence and the new Siri remain US-English only years after announcement. Users in other regions report never even seeing the rainbow glow UI. Even basic features like dropping 'Hey' from 'Hey Siri' are still US-only.",
+      "severity": "medium",
+      "frequency": 734
+    }
+  ],
+  "featureRequests": [
+    { "id": "fr1", "title": "Actual agentic phone control", "description": "Let Siri book appointments, order food on DoorDash, navigate apps, pull auth codes, and execute multi-step real-world tasks like a human assistant would.", "votes": 3840, "category": "Core" },
+    { "id": "fr2", "title": "Personal context and memory", "description": "Search old messages, remember preferences, recall prior conversations, and use personal data to answer questions without re-explaining context every time.", "votes": 2960, "category": "AI" },
+    { "id": "fr3", "title": "Reliable natural language understanding", "description": "Stop requiring exact phrasing. Understand 'stop directions', 'what's the temperature', and contextual follow-ups without falling back to web search or wrong actions.", "votes": 2450, "category": "Core" },
+    { "id": "fr4", "title": "Third-party app deep integration via AppIntents", "description": "Make it easy and free for developers to integrate with Siri so users can control any app by voice, not just Apple's built-in apps.", "votes": 1870, "category": "Developer" },
+    { "id": "fr5", "title": "Privacy-preserving on-device AI that actually works", "description": "Deliver on the promise of local AI processing. Stop requiring cloud round-trips for basic tasks while maintaining Apple's privacy advantage.", "votes": 1540, "category": "Privacy" },
+    { "id": "fr6", "title": "Transparent Gemini integration without privacy compromise", "description": "Use Google's Gemini backend effectively while maintaining Apple's Private Cloud Compute guarantees. Don't sacrifice the one advantage Apple has in AI.", "votes": 1120, "category": "Privacy" },
+    { "id": "fr7", "title": "Consistent multi-device handoff", "description": "Intelligently route commands to the correct device and provide clear feedback about which device is responding. Never silently drop a command.", "votes": 890, "category": "UX" },
+    { "id": "fr8", "title": "Global availability — stop region-locking AI features", "description": "Ship Apple Intelligence and new Siri capabilities worldwide simultaneously rather than US-first with indefinite delays for other regions.", "votes": 756, "category": "Accessibility" }
+  ],
+  "sentiment": {
+    "positive": 18,
+    "neutral": 21,
+    "negative": 61,
+    "summary": "Reddit sentiment toward Siri is overwhelmingly negative and mocking. The dominant narrative is a decade of neglect followed by two years of broken WWDC promises. Users treat 'Here's what I found on the web' as a punchline. The Gemini partnership offers a glimmer of hope, but trust is at rock bottom — most commenters expect Apple to fumble the integration too. The few positive voices praise Apple's privacy stance but acknowledge it means nothing without a working product."
+  },
+  "competitors": [
+    {
+      "id": "c1",
+      "name": "Google Gemini",
+      "description": "Google's frontier AI model, now powering Siri's backend.",
+      "threat_level": "high",
+      "comparison": "Gemini is simultaneously Siri's savior and biggest threat. Google is providing the AI backbone Apple couldn't build, but this dependency undermines Apple's independence narrative. Reddit users note Google Assistant on Pixel already does everything Apple has been promising for two years."
+    },
+    {
+      "id": "c2",
+      "name": "ChatGPT (voice mode)",
+      "description": "OpenAI's conversational AI with advanced voice.",
+      "threat_level": "high",
+      "comparison": "ChatGPT's voice mode is the benchmark Reddit users compare Siri against. Its multi-turn memory, nuanced answers, and ability to handle complex requests make Siri look 'like a typewriter next to a computer'. Many users already use ChatGPT on iPhone as their de facto assistant."
+    },
+    {
+      "id": "c3",
+      "name": "Google Assistant (Pixel)",
+      "description": "Google's integrated phone assistant on Pixel devices.",
+      "threat_level": "medium",
+      "comparison": "Google's Pixel ads mocking Siri delays resonate because they're true. Samsung and Google have shipped working AI integration into Android while Apple is still promising. Reddit users cite this as the primary reason they're considering switching platforms."
+    },
+    {
+      "id": "c4",
+      "name": "Alexa",
+      "description": "Amazon's smart home and voice assistant.",
+      "threat_level": "low",
+      "comparison": "Alexa's smart home dominance makes Apple's HomePod Siri look especially weak. Users report Google Home being 'light years more responsive' than Siri for home control, and Alexa's skill ecosystem dwarfs SiriKit's limited surface area."
+    }
+  ],
+  "roadmap": [
+    { "id": "r1", "title": "Ship the personalized Siri promised at WWDC 2024", "priority": "P1", "impact": "High", "effort": "High", "reason": "Referenced in 61% of negative threads; the single biggest credibility issue for Apple AI", "percentage": 61 },
+    { "id": "r2", "title": "Fix natural language comprehension for basic commands", "priority": "P1", "impact": "High", "effort": "Medium", "reason": "The 'here's what I found on the web' failure appears in 53% of complaint threads", "percentage": 53 },
+    { "id": "r3", "title": "Reliable CarPlay voice control", "priority": "P1", "impact": "High", "effort": "Medium", "reason": "Safety-critical failures while driving cited in 38% of Siri frustration posts", "percentage": 38 },
+    { "id": "r4", "title": "Agentic capabilities — book, order, navigate", "priority": "P2", "impact": "High", "effort": "High", "reason": "Top feature request with 44% of users wanting Siri to act as a real assistant", "percentage": 44 },
+    { "id": "r5", "title": "Successful Gemini backend integration", "priority": "P2", "impact": "High", "effort": "High", "reason": "The Gemini deal is Apple's last credible path to parity; 35% of threads discuss it", "percentage": 35 },
+    { "id": "r6", "title": "Multi-device routing and handoff fix", "priority": "P2", "impact": "Medium", "effort": "Medium", "reason": "HomePod/Watch/iPhone confusion cited in 27% of daily-use complaint threads", "percentage": 27 },
+    { "id": "r7", "title": "Global rollout of Apple Intelligence features", "priority": "P3", "impact": "High", "effort": "Medium", "reason": "Region-locking frustrates 22% of international users who feel like second-class citizens", "percentage": 22 },
+    { "id": "r8", "title": "Free and simple AppIntents for third-party developers", "priority": "P3", "impact": "Medium", "effort": "Low", "reason": "Developer reluctance to integrate with Siri due to potential fees blocks ecosystem growth", "percentage": 19 },
+    { "id": "r9", "title": "On-device LLM that delivers on privacy promise", "priority": "P3", "impact": "Medium", "effort": "High", "reason": "Privacy is Apple's only AI differentiator; 16% of threads discuss it as make-or-break", "percentage": 16 }
+  ]
+}
