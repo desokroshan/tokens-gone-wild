@@ -18,65 +18,68 @@ export function RoadmapPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-10">
-      {/* Header */}
       <motion.div
-        initial={{ opacity: 0, y: 16 }}
+        initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4 }}
-        className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8"
+        transition={{ duration: 0.38 }}
+        className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8"
       >
         <div>
-          <div className="flex items-center gap-3 mb-1">
-            <Link to="/insights" className="text-xs text-white/30 hover:text-white/60 transition-colors no-underline">
-              ← Insights
-            </Link>
-          </div>
-          <h1 className="text-3xl font-bold text-white">Product Roadmap</h1>
-          <p className="text-sm text-white/40 mt-1">
+          <Link
+            to="/insights"
+            className="text-xs no-underline transition-colors mb-2 inline-block"
+            style={{ color: 'rgba(255,255,255,0.28)' }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.55)')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.28)')}
+          >
+            ← Insights
+          </Link>
+          <h1 className="text-3xl font-bold text-white tracking-tight">Product roadmap</h1>
+          <p className="text-sm mt-1" style={{ color: 'rgba(255,255,255,0.36)' }}>
             AI-generated priorities for{' '}
-            <span className="text-white/60 font-medium">{query || result?.query}</span> based on{' '}
-            {result?.roadmap.length} opportunities identified
+            <span style={{ color: 'rgba(255,255,255,0.6)' }} className="font-medium">
+              {query || result?.query}
+            </span>{' '}
+            — {result?.roadmap.length} opportunities identified
           </p>
         </div>
 
         <div
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-medium"
+          className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-medium"
           style={{
-            background: 'rgba(124,58,237,0.12)',
-            border: '1px solid rgba(124,58,237,0.25)',
-            color: '#a78bfa',
+            background: 'rgba(201,140,46,0.1)',
+            border: '1px solid rgba(201,140,46,0.22)',
+            color: '#c98c2e',
           }}
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse" />
+          <span className="w-1.5 h-1.5 rounded-full" style={{ background: '#c98c2e', boxShadow: '0 0 6px rgba(201,140,46,0.8)' }} />
           Prioritized by impact × reach
         </div>
       </motion.div>
 
-      {/* Legend */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.15 }}
-        className="flex items-center gap-6 mb-6"
+        transition={{ delay: 0.14 }}
+        className="flex items-center gap-5 mb-6"
       >
         {[
-          { color: '#ef4444', label: 'P1 — Critical / Must Build' },
-          { color: '#f59e0b', label: 'P2 — High Value / Should Build' },
-          { color: '#0ea5e9', label: 'P3 — Opportunistic / Nice to Have' },
+          { color: '#c25252', label: 'P1 — critical / must build' },
+          { color: '#c98c2e', label: 'P2 — high value / should build' },
+          { color: '#3d9680', label: 'P3 — opportunistic / nice to have' },
         ].map(({ color, label }) => (
-          <div key={label} className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full" style={{ background: color }} />
-            <span className="text-xs text-white/40">{label}</span>
+          <div key={label} className="flex items-center gap-1.5">
+            <div className="w-1.5 h-1.5 rounded-full" style={{ background: color }} />
+            <span className="text-xs" style={{ color: 'rgba(255,255,255,0.35)' }}>{label}</span>
           </div>
         ))}
       </motion.div>
 
-      {/* Kanban columns */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.45, delay: 0.1 }}
-        className="grid grid-cols-1 lg:grid-cols-3 gap-6"
+        transition={{ duration: 0.42, delay: 0.1 }}
+        className="grid grid-cols-1 lg:grid-cols-3 gap-5"
       >
         {PRIORITIES.map((p) => (
           <RoadmapColumn key={p} priority={p} items={grouped[p]} />

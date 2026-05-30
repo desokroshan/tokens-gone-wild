@@ -1,14 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --color-surface-900: #0f0f1a;
-  --color-surface-800: #161628;
-  --color-surface-700: #1e1e35;
-  --color-brand-purple: #7c3aed;
-  --color-brand-blue: #2563eb;
-  --color-brand-cyan: #06b6d4;
-  --color-glass: rgba(255, 255, 255, 0.05);
-  --font-family-sans: "Inter", system-ui, sans-serif;
+  --color-surface-900: #0c0b09;
+  --color-surface-800: #141210;
+  --color-surface-700: #1d1a14;
+  --color-surface-600: #262118;
+  --color-accent: #c98c2e;
+  --color-accent-light: #e3b264;
+  --color-glass: rgba(255, 255, 255, 0.04);
+  --font-family-sans: "Outfit", system-ui, sans-serif;
 }
 
 * {
@@ -22,9 +23,21 @@ body,
 }
 
 body {
-  background-color: #0f0f1a;
+  background-color: #0c0b09;
   color: white;
-  font-family: "Inter", system-ui, sans-serif;
+  font-family: "Outfit", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Subtle noise texture */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 300px 300px;
 }

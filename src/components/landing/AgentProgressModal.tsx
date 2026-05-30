@@ -46,53 +46,52 @@ export function AgentProgressModal({ visible, onComplete }: AgentProgressModalPr
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="fixed inset-0 z-50 flex items-center justify-center"
-      style={{ background: 'rgba(15,15,26,0.92)', backdropFilter: 'blur(8px)' }}
+      style={{ background: 'rgba(12,11,9,0.94)', backdropFilter: 'blur(10px)' }}
     >
-      <div className="flex flex-col items-center gap-8 max-w-lg w-full px-8">
-        {/* Spinner */}
-        <div className="relative w-16 h-16">
+      <div className="flex flex-col items-center gap-8 max-w-sm w-full px-8">
+        {/* Pulsing dot cluster */}
+        <div className="relative flex items-center justify-center w-16 h-16">
           <motion.div
-            className="absolute inset-0 rounded-full"
-            style={{ border: '3px solid rgba(124,58,237,0.2)' }}
+            className="absolute w-16 h-16 rounded-full"
+            style={{ background: 'rgba(201,140,46,0.06)', border: '1px solid rgba(201,140,46,0.15)' }}
+            animate={{ scale: [1, 1.12, 1] }}
+            transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
           />
           <motion.div
-            className="absolute inset-0 rounded-full"
-            style={{
-              border: '3px solid transparent',
-              borderTopColor: '#7c3aed',
-              borderRightColor: '#2563eb',
-            }}
-            animate={{ rotate: 360 }}
-            transition={{ duration: 0.9, repeat: Infinity, ease: 'linear' }}
+            className="absolute w-10 h-10 rounded-full"
+            style={{ background: 'rgba(201,140,46,0.1)', border: '1px solid rgba(201,140,46,0.25)' }}
+            animate={{ scale: [1, 1.18, 1] }}
+            transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}
           />
           <div
-            className="absolute inset-2 rounded-full"
-            style={{ background: 'radial-gradient(circle, rgba(124,58,237,0.3), transparent)' }}
+            className="w-3.5 h-3.5 rounded-full"
+            style={{ background: '#c98c2e', boxShadow: '0 0 14px rgba(201,140,46,0.7)' }}
           />
         </div>
 
         {/* Step text */}
-        <div className="text-center min-h-[3rem] flex items-center justify-center">
+        <div className="text-center h-12 flex items-center justify-center">
           <AnimatePresence mode="wait">
             {done ? (
               <motion.p
                 key="done"
-                initial={{ opacity: 0, y: 8 }}
+                initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                className="text-xl font-semibold"
-                style={{ color: '#4ade80' }}
+                exit={{ opacity: 0, y: -6 }}
+                className="text-base font-semibold"
+                style={{ color: '#c98c2e' }}
               >
-                ✓ Analysis complete
+                Analysis complete
               </motion.p>
             ) : (
               <motion.p
                 key={step}
-                initial={{ opacity: 0, y: 8 }}
+                initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.25 }}
-                className="text-lg font-medium text-white/90 text-center"
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.22 }}
+                className="text-base font-medium text-center"
+                style={{ color: 'rgba(255,255,255,0.75)' }}
               >
                 {AGENT_STEPS[step]}
               </motion.p>
@@ -102,19 +101,19 @@ export function AgentProgressModal({ visible, onComplete }: AgentProgressModalPr
 
         {/* Progress bar */}
         <div className="w-full">
-          <div className="h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.08)' }}>
+          <div className="h-px rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.08)' }}>
             <motion.div
               className="h-full rounded-full"
-              style={{ background: 'linear-gradient(90deg, #7c3aed, #2563eb, #06b6d4)' }}
+              style={{ background: '#c98c2e' }}
               initial={{ width: '0%' }}
               animate={{ width: `${progress}%` }}
               transition={{ duration: 0.4, ease: 'easeOut' }}
             />
           </div>
-          <div className="flex justify-between mt-2">
-            <span className="text-xs text-white/30">Running AI agents...</span>
-            <span className="text-xs text-white/30">
-              {step + 1} / {AGENT_STEPS.length}
+          <div className="flex justify-between mt-2.5">
+            <span className="text-xs" style={{ color: 'rgba(255,255,255,0.25)' }}>Running agents</span>
+            <span className="text-xs tabular-nums" style={{ color: 'rgba(255,255,255,0.25)' }}>
+              {step + 1}/{AGENT_STEPS.length}
             </span>
           </div>
         </div>

@@ -1,15 +1,15 @@
 import type { ImpactEffort, ThreatLevel } from '../../types'
 
 const IMPACT_CONFIG: Record<ImpactEffort, { bg: string; text: string }> = {
-  High:   { bg: 'rgba(124,58,237,0.2)',  text: '#a78bfa' },
-  Medium: { bg: 'rgba(37,99,235,0.2)',   text: '#60a5fa' },
-  Low:    { bg: 'rgba(100,116,139,0.2)', text: '#94a3b8' },
+  High:   { bg: 'rgba(201,140,46,0.15)', text: '#e3b264' },
+  Medium: { bg: 'rgba(180,160,110,0.12)', text: 'rgba(255,255,255,0.55)' },
+  Low:    { bg: 'rgba(120,120,120,0.12)', text: 'rgba(255,255,255,0.35)' },
 }
 
 const THREAT_CONFIG: Record<ThreatLevel, { bg: string; text: string }> = {
-  high:   { bg: 'rgba(239,68,68,0.15)',  text: '#f87171' },
-  medium: { bg: 'rgba(234,179,8,0.15)',  text: '#facc15' },
-  low:    { bg: 'rgba(34,197,94,0.15)',  text: '#4ade80' },
+  high:   { bg: 'rgba(194,82,82,0.12)',  text: '#d07878' },
+  medium: { bg: 'rgba(184,144,64,0.12)', text: '#c8a85a' },
+  low:    { bg: 'rgba(74,148,112,0.12)', text: '#7ac09a' },
 }
 
 interface ImpactBadgeProps {
@@ -38,10 +38,10 @@ export function ThreatBadge({ level }: ThreatBadgeProps) {
   const label = level.charAt(0).toUpperCase() + level.slice(1)
   return (
     <span
-      className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+      className="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium"
       style={{ background: bg, color: text }}
     >
-      {label} Threat
+      {label} threat
     </span>
   )
 }

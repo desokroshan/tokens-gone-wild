@@ -11,12 +11,15 @@ function CompetitorRow({ competitor }: { competitor: Competitor }) {
     <div>
       <button
         onClick={() => setExpanded((v) => !v)}
-        className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left hover:bg-white/[0.03] transition-colors"
+        className="w-full flex items-center gap-3 px-3 py-3 rounded-lg text-left hover:bg-white/[0.025] transition-colors"
       >
-        {/* Avatar */}
         <div
-          className="w-8 h-8 rounded-lg flex-shrink-0 flex items-center justify-center text-sm font-bold text-white"
-          style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.4), rgba(37,99,235,0.4))', border: '1px solid rgba(255,255,255,0.1)' }}
+          className="w-8 h-8 rounded-lg flex-shrink-0 flex items-center justify-center text-xs font-bold"
+          style={{
+            background: 'rgba(201,140,46,0.1)',
+            border: '1px solid rgba(201,140,46,0.2)',
+            color: '#c98c2e',
+          }}
         >
           {competitor.name[0]}
         </div>
@@ -26,13 +29,16 @@ function CompetitorRow({ competitor }: { competitor: Competitor }) {
             <span className="text-sm font-semibold text-white">{competitor.name}</span>
             <ThreatBadge level={competitor.threat_level} />
           </div>
-          <p className="text-xs text-white/40 truncate mt-0.5">{competitor.description}</p>
+          <p className="text-xs truncate mt-0.5" style={{ color: 'rgba(255,255,255,0.35)' }}>
+            {competitor.description}
+          </p>
         </div>
 
         <motion.span
-          className="text-white/30 text-xs flex-shrink-0"
+          className="text-xs flex-shrink-0"
+          style={{ color: 'rgba(255,255,255,0.25)' }}
           animate={{ rotate: expanded ? 180 : 0 }}
-          transition={{ duration: 0.2 }}
+          transition={{ duration: 0.18 }}
         >
           ▾
         </motion.span>
@@ -44,10 +50,13 @@ function CompetitorRow({ competitor }: { competitor: Competitor }) {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25 }}
+            transition={{ duration: 0.22 }}
             className="overflow-hidden"
           >
-            <p className="text-xs text-white/50 leading-relaxed px-4 pt-1 pb-3 ml-11">
+            <p
+              className="text-xs leading-relaxed px-4 pt-1 pb-3 ml-11"
+              style={{ color: 'rgba(255,255,255,0.42)' }}
+            >
               {competitor.comparison}
             </p>
           </motion.div>
@@ -60,11 +69,14 @@ function CompetitorRow({ competitor }: { competitor: Competitor }) {
 export function CompetitorsCard({ competitors }: { competitors: Competitor[] }) {
   return (
     <GlassCard className="flex flex-col">
-      <div className="flex items-center justify-between px-6 py-4" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-        <h2 className="font-semibold text-white text-base">Competitive Threats</h2>
+      <div
+        className="flex items-center justify-between px-5 py-4"
+        style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}
+      >
+        <h2 className="font-semibold text-white text-sm tracking-tight">Competitive threats</h2>
         <span
-          className="text-xs font-medium px-2 py-0.5 rounded-full"
-          style={{ background: 'rgba(239,68,68,0.12)', color: '#f87171' }}
+          className="text-xs font-medium px-2 py-0.5 rounded-md"
+          style={{ background: 'rgba(220,60,60,0.1)', color: '#e07070' }}
         >
           {competitors.filter((c) => c.threat_level === 'high').length} high risk
         </span>

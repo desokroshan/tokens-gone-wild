@@ -9,11 +9,11 @@ interface GlassCardProps {
 export function GlassCard({ children, className, style }: GlassCardProps) {
   return (
     <div
-      className={clsx('rounded-2xl overflow-hidden', className)}
+      className={clsx('rounded-xl overflow-hidden', className)}
       style={{
-        background: 'rgba(255,255,255,0.04)',
+        background: 'rgba(255,255,255,0.03)',
         backdropFilter: 'blur(12px)',
-        border: '1px solid rgba(255,255,255,0.08)',
+        border: '1px solid rgba(255,255,255,0.07)',
         ...style,
       }}
     >
